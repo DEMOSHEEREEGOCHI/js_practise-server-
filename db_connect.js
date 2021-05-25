@@ -6,13 +6,25 @@ const connection = mysql.createConnection({
     database: "todos",
     password: "jghcn2001"
 });
-connection.connect(function(err) {
-    if (err) {
-        return console.error("Ошибка: " + err.message);
-    } else {
-        console.log("Подключение к серверу MySQL успешно установлено");
+
+
+const initDB = async() => {
+        try {
+            await connection.connect;
+        } catch {
+
+        }
     }
-});
+    /*
+    await connection.connect(function(err) {
+        if (err) {
+            return console.error("Ошибка: " + err.message);
+        } else {
+            console.log("Подключение к серверу MySQL успешно установлено");
+
+        }
+    });*/
+
 let data = "dsa0";
 connection.query("INSERT todo (title) VALUES (?)", data,
     function(err, results, fields) {
