@@ -5,7 +5,7 @@ const { asyncHandler, syncHandler } = require('../middlewares/middlewares');
 const router = Router();
 
 function initRoutes() {
-    router.all('/', syncHandler(test));
+    router.all('/', asyncHandler(test));
 }
 
 function test(req, res, next) {
