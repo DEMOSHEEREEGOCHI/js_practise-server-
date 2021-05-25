@@ -6,15 +6,17 @@ const router = require('./controllers/api.controller');
 const { initDB } = require('./db_connect');
 const { logger, errorHandler } = require('./middlewares/middlewares')
 
+initDB();
 
-//initDB();
+
+//CreateToDo('32');
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(logger);
 app.get('/me', (req, res) => {
     res.status(200).json({ message: 'All is ok!' });
-})
+});
 app.use(router);
 app.use(errorHandler);
 /*

@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const ErrorResponse = require('../classes/error-response');
 const { asyncHandler, syncHandler } = require('../middlewares/middlewares');
+const { initDB, getTodos, closeDB, CreateToDo } = require('../db_connect');
 
 const router = Router();
 
@@ -15,8 +16,7 @@ function initRoutes() {
 
 
 async function getToDos(req, res, next) {
-    throw new ErrorResponse("some error", 403);
-    res.status(200).json({ message: 'This is test )' });
+    res.status(200).json({ getTodos });
 }
 async function getToDoById(req, res, next) {
     res.status(200).json({ message: 'This is test )' });
