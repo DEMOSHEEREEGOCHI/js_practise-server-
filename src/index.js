@@ -2,18 +2,13 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const { response } = require('express');
-const connection = require('db_connect.js');
+const testRouter = require('./controllers/test.controller');
+//const connection = require('db_connect.js');
 
 const app = express();
 app.use(cors());
 
-const asyncHandler = (fn) => (req, res, next) => {
-    try {
-        fn(req, res, next)
-    } catch (error) {
-        next(error);
-    }
-};
+
 
 
 
@@ -70,7 +65,7 @@ app.delete('/deletetodo', (req, res) => {
     deleteToDo(todoCount - 1);
     res.status(200).json("delete to do success");
 })
-
+app.use('/test', testRouter);
 
 http.createServer(app).listen(3000, () => {
     console.log('Server is working on port 3000');
