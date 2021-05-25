@@ -25,6 +25,6 @@ const errorHandler = (req, res, next) => {
 module.exports = {
     asyncHandler,
     syncHandler,
-    notFound,
+    // notFound,
     errorHandler
 }
