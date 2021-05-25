@@ -1,8 +1,8 @@
-import * as db from 'db_connect.js';
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const { response } = require('express');
+const connection = require('db_connect.js');
 
 const app = express();
 app.use(cors());
@@ -77,5 +77,5 @@ http.createServer(app).listen(3000, () => {
     console.log(todoCount);
 })
 
-db.connect;
-db.end;
+//db.connect;
+//db.end;

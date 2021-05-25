@@ -35,4 +35,4 @@ if (err) {
 console.log("Подключение закрыто");
 });*/
 
-//export { connection };
+module.exports = connection;
