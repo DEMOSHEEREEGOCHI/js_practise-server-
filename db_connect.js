@@ -13,8 +13,8 @@ connection.connect(function(err) {
         console.log("Подключение к серверу MySQL успешно установлено");
     }
 });
-
-connection.execute("SELECT * FROM todo",
+let data = "dsa0";
+connection.query("INSERT todo (title) VALUES (?)", data,
     function(err, results, fields) {
         console.log(err);
         console.log(results); // собственно данные
