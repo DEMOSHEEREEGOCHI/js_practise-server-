@@ -69,6 +69,15 @@ const deleteTodoById = async(id = 0) => {
     return rows;
 }
 
+const changeTheFlag = async(id, isComplete = 0) => {
+    const connection = await mysql.createConnection(sqlConfig);
+    const [rows] = await connection.execute(`UPDATE todo SET isComplete=${isComplete} WHERE _id=${id}`);
+    console.log("sql result rows:", rows);
+    const [result] = await connection.execute(`SELECT * FROM todo WHERE _id = ${rows.insertId} `);
+    await connection.end();
+    return rows;
+}
+
 
 
 module.exports = {
@@ -77,5 +86,6 @@ module.exports = {
     deleteTodo,
     createToDo,
     getTodos,
-    deleteTodoById
+    deleteTodoById,
+    changeTheFlag
 }

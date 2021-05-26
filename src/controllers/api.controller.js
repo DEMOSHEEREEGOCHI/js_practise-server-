@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const ErrorResponse = require('../classes/error-response');
 const { asyncHandler } = require('../middlewares/middlewares');
-const { getTodos, createToDo, getTodoById, deleteTodo, deleteTodoById } = require('../db_connect');
+const { getTodos, createToDo, getTodoById, deleteTodo, deleteTodoById, changeTheFlag } = require('../db_connect');
 
 const router = Router();
 
@@ -37,7 +37,8 @@ async function deleteToDoById(req, res, next) {
     res.status(200).json({ message: 'ToDo has been eliminated!' });
 }
 async function patchToDo(req, res, next) {
-    res.status(200).json({ message: 'This is test )' });
+    const result = await changeTheFlag(req.params.id, req.body.isComplete)
+    res.status(200).json({ message: 'Updated!' });
 }
 
 initRoutes();
