@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const ErrorResponse = require('../classes/error-response');
-const { asyncHandler, syncHandler } = require('../middlewares/middlewares');
-const { initDB, getTodos, closeDB, CreateToDo } = require('../db_connect');
+const { asyncHandler } = require('../middlewares/middlewares');
+const { getTodos, createToDo, getTodoById, deleteTodo, deleteTodoById } = require('../db_connect');
 
 const router = Router();
 
 function initRoutes() {
     router.get('/api/todos', asyncHandler(getToDos));
     router.get('/api/todos/:id', asyncHandler(getToDoById));
-    router.post('/api/todos', asyncHandler(createToDo));
+    router.post('/api/todos', asyncHandler(create));
     router.delete('/api/todos', asyncHandler(deleteToDo));
     router.delete('/api/todos/:id', asyncHandler(deleteToDoById));
     router.patch('/api/todos/:id', asyncHandler(patchToDo));
@@ -16,19 +16,25 @@ function initRoutes() {
 
 
 async function getToDos(req, res, next) {
-    res.status(200).json({ getTodos });
+    const result = await getTodos();
+    res.status(200).json(result)
+
 }
 async function getToDoById(req, res, next) {
-    res.status(200).json({ message: 'This is test )' });
+    const result = await getTodoById(req.params.id);
+    res.status(200).json(result);
 }
-async function createToDo(req, res, next) {
-    res.status(200).json({ message: 'This is test )' });
+async function create(req, res, next) {
+    const result = await createToDo(req.body);
+    res.status(200).json(result);
 }
 async function deleteToDo(req, res, next) {
-    res.status(200).json({ message: 'This is test )' });
+    await deleteTodo();
+    res.status(200).json({ message: 'all is doomed!' });
 }
 async function deleteToDoById(req, res, next) {
-    res.status(200).json({ message: 'This is test )' });
+    const result = await deleteTodoById(req.params.id);
+    res.status(200).json({ message: 'ToDo has been eliminated!' });
 }
 async function patchToDo(req, res, next) {
     res.status(200).json({ message: 'This is test )' });

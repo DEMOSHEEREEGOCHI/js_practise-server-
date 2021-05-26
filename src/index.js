@@ -1,12 +1,12 @@
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
-const { response } = require('express');
+
 const router = require('./controllers/api.controller');
-const { initDB } = require('./db_connect');
+
 const { logger, errorHandler } = require('./middlewares/middlewares')
 
-initDB();
+//initDB();
 
 
 //CreateToDo('32');

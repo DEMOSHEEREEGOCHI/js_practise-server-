@@ -5,9 +5,7 @@ const syncHandler = (fn) => (req, res, next) => {
         next(error);
     }
 };
-const asyncHandler = (fn) => (req, res, next) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-};
+
 //const notFound = (req, _res, next) => {
 
 
@@ -22,7 +20,9 @@ const logger = (req, res, next) => {
 
     next();
 };
-
+const asyncHandler = (fn) => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
 
 const errorHandler = (err, req, res, next) => {
     console.log('Ошибка', {
