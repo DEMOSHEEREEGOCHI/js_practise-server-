@@ -5,7 +5,7 @@ const sqlConfig = {
     host: "localhost",
     user: "root",
     database: "todos",
-    password: "1q2w3e"
+    password: "jghcn2001"
 };
 
 

@@ -17,8 +17,7 @@ function initRoutes() {
 
 async function getToDos(req, res, next) {
     const result = await getTodos();
-    res.status(200).json(result)
-
+    res.status(200).json({ todos: result });
 }
 async function getToDoById(req, res, next) {
     const result = await getTodoById(req.params.id);
