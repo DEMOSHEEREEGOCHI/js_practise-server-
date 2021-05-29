@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 
-const router = require('./controllers/api.controller');
+const userRouter = require('./controllers/user.controller');
+const todoRouter = require('./controllers/todo.controller');
 const{initDB}= require('./database/index')
 const { logger, errorHandler } = require('./middlewares/middlewares')
 
@@ -19,7 +20,8 @@ app.use(logger);
 app.get('/me', (req, res) => {
     res.status(200).json({ message: 'All is ok!' });
 });
-app.use(router);
+app.use(todoRouter);
+app.use(userRouter);
 app.use(errorHandler);
 
 http.createServer(app).listen(9000, () => {
