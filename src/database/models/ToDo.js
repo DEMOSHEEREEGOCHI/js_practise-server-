@@ -5,7 +5,7 @@ class ToDo extends Sequelize.Model {}
 
 ToDo.init(
     {
-        _id: {
+        id: {
             type: Sequelize.DataTypes.UUID,
             primaryKey: true,
             defaultValue: Sequelize.DataTypes.UUIDV4
