@@ -12,16 +12,15 @@ const app = express();
 //initDB();
 initDB();
 
-
-
 app.use(cors());
 app.use(express.json());
 app.use(logger);
 app.get('/me', (req, res) => {
     res.status(200).json({ message: 'All is ok!' });
 });
-app.use(todoRouter);
 app.use(userRouter);
+app.use(todoRouter);
+
 app.use(errorHandler);
 
 http.createServer(app).listen(9000, () => {

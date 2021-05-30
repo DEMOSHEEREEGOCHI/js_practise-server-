@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const ErrorResponse = require('../classes/error-response');
 const { asyncHandler } = require('../middlewares/middlewares');
-const ToDo = require('../database/models/ToDo')
+const ToDo = require('../database/models/ToDo');
 
 const todoRouter = Router();
 
@@ -16,7 +16,16 @@ function initRoutes() {
 
 
 async function getToDos(req, res, next) {
-    const todos = await ToDo.findAll();
+    let where = {
+        userId: req.query.userId
+    }
+    if (typeof req.query.isComplete === "string") {
+
+        where.isComplete = (req.query.isComplete === 'true');
+    }
+    const todos = await ToDo.findAll({
+        where
+    });
     res.status(200).json({ todos });
 }
 async function getToDoById(req, res, next) {
@@ -29,21 +38,25 @@ async function create(req, res, next) {
 }
 async function deleteToDo(req, res, next) {
     await ToDo.destroy({
-        truncate: true
+        where: {
+            userId: req.query.userId
+        }
     });
     res.status(200).json({ message: 'all is doomed!' });
 }
 async function deleteToDoById(req, res, next) {
     const result = await ToDo.findByPk(req.params.id);
-    if(!result) throw new ErrorResponse('No todo found',404);
+    if (!result) throw new ErrorResponse('No todo found', 404);
     await result.destroy();
     res.status(200).json(result);
 }
 async function patchToDo(req, res, next) {
-    let todo = await ToDo.findByPk(req.params.id);
-   
-    await todo.update(req.body); 
-     todo = await ToDo.findByPk(req.params.id);
+    await ToDo.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    });
+    todo = await ToDo.findByPk(req.params.id);
     res.status(200).json(todo);
 }
 

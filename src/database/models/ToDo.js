@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 const { sequelize } = require('..');
+const User = require('./User');
 
-class ToDo extends Sequelize.Model {}
+class ToDo extends Sequelize.Model { }
 
 ToDo.init(
     {
@@ -9,6 +10,15 @@ ToDo.init(
             type: Sequelize.DataTypes.UUID,
             primaryKey: true,
             defaultValue: Sequelize.DataTypes.UUIDV4
+        },
+        userId: {
+            allowNull: true,
+            type: Sequelize.DataTypes.UUID,
+            references: {
+                model: "users",
+                key: 'id',
+                
+            }
         },
         title: {
             type: Sequelize.STRING,
@@ -22,8 +32,10 @@ ToDo.init(
             type: Sequelize.BOOLEAN,
             defaultValue: false,
         },
+
     },
     { sequelize: sequelize, underscored: true, modelName: 'todo' }
 );
+
 
 module.exports = ToDo
