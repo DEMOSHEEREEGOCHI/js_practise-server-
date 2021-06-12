@@ -24,7 +24,7 @@ async function getToDos(req, res, next) {
         where.isComplete = (req.query.isComplete === 'true');
     }
     const todos = await ToDo.findAll({
-        where
+       where
     });
     res.status(200).json({ todos });
 }
@@ -62,4 +62,4 @@ async function patchToDo(req, res, next) {
 
 initRoutes();
 
-module.exports = todoRouter;
+module.exports = todoRouter; 
