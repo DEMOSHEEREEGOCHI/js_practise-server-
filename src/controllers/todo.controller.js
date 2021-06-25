@@ -19,6 +19,7 @@ async function getToDos(req, res, next) {
     let where = {
         userId: req.query.userId
     }
+    console.log("QUERY:%j",req.query);
     if (typeof req.query.isComplete === "string") {
 
         where.isComplete = (req.query.isComplete === 'true');

@@ -9,8 +9,7 @@ const sqlConfig = {
 };
 
 
-// const initDB = () => {
-//     try {
+// const initDB = () => {//     try {
 //         connection.connect();
 //         console.log("подключение успешно")
 //     } catch (error) {
@@ -52,7 +51,6 @@ const createToDo = async (data) => {
     const [result] = await connection.execute(`SELECT * FROM todo WHERE id = ${rows.insertId} `);
     await connection.end();
     return result;
-
 }
 const deleteTodo = async () => {
     const connection = await mysql.createConnection(sqlConfig);
