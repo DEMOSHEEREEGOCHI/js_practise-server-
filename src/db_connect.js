@@ -1,6 +1,5 @@
 const mysql = require("mysql2/promise");
-// const pool = mysql.createPool({ host: 'localhost', user: 'root', database: 'todos', password: "jghcn2001" });
-// const promisePool = pool.promise();
+
 const sqlConfig = {
     host: "localhost",
     user: "root",
@@ -8,27 +7,6 @@ const sqlConfig = {
     password: "jghcn2001"
 };
 
-
-// const initDB = () => {//     try {
-//         connection.connect();
-//         console.log("подключение успешно")
-//     } catch (error) {
-//         console.log("Ошибка: " + error.message);
-//         initDB();
-//     }
-// }
-
-/*const getTodos = async() => {
-    connection.execute("SELECT * FROM todo",
-        function(err, results, fields) {
-            console.log(err);
-            await results; // собственно данные
-            // console.log(fields); // мета-данные полей 
-
-
-
-        });
-}*/
 const getTodos = async () => {
     const connection = await mysql.createConnection(sqlConfig);
     const [rows] = await connection.execute("SELECT * FROM todo");
