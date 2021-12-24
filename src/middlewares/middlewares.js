@@ -6,10 +6,6 @@ const syncHandler = (fn) => (req, res, next) => {
     }
 };
 
-//const notFound = (req, _res, next) => {
-
-
-
 const logger = (req, res, next) => {
     console.log('URL = ', req.url);
     console.log('METHOD = ', req.method);
@@ -20,6 +16,7 @@ const logger = (req, res, next) => {
 
     next();
 };
+
 const asyncHandler = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
@@ -45,6 +42,5 @@ module.exports = {
     asyncHandler,
     syncHandler,
     logger,
-    // notFound,
     errorHandler
 }
